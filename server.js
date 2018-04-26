@@ -33,9 +33,29 @@ var hungryPeople = [
     phoneNumber: "777.777.7777",
     customerEmail: "c@c.com",
     customerID: "aa"
+  },
+  {
+    customerName: "Tanner",
+    phoneNumber: "555.555.5555",
+    customerEmail: "d@d.com",
+    customerID: "ta"
+  },
+  {
+    customerName: "Rashad",
+    phoneNumber: "444.444.4444",
+    customerEmail: "e@e.com",
+    customerID: "ra"
   }
 ];
 
+var waitingHungryPeople = [
+    {
+        customerName: "Waiting",
+        phoneNumber: "333.333.3333",
+        customerEmail: "f@f.com",
+        customerID: "wa"
+    }
+];
 // Routes
 // =============================================================
 
@@ -59,17 +79,10 @@ app.get("/api/tables", function(req, res) {
 
 // Displays hungry people waiting
 app.get("/api/waitlist", function(req, res) {
-    var waiting = [];
-
-    if (waiting) {
-        for (i = 5; i < hungryPeople.length; i++) {
-            waiting.push(hungryPeople);
-        }
-        return json(waiting);
-    } else {
-        return [];
+    for (i = 0; i < waitingHungryPeople.length; i++) {
+        return res.json(waitingHungryPeople);
     }
-  });
+});
 
 
 // Create New Characters - takes in JSON input
