@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="jumbotron">
@@ -21,7 +25,7 @@
         </p>
       </div>
       <div class = "panel-body"
-      <form role="form">
+      <form role="form" method="POST">
 
         <div class="form-group">
             <label for="">Name</label>
@@ -43,9 +47,41 @@
             <input type="text" class="form-control" id="reserve_uniqueID">
         </div>
 
-        <button type="submit" class="btn btn-primary submit">Submit</button>
+        <button type="submit" class="btn btn-primary submit" id="add-btn">Submit</button>
     </form>
-    </div>
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    
+	
+	<script type="text/javascript">
+		
+		$("#add-btn").on("click", (event) => {
+			event.preventDefault();
+			var newHungryPerson = {
+				customerName: $("#reserve_name").val().trim(),
+				phoneNumber: $("#reserve_phone").val().trim(),
+				customerEmail: $("#reserve_email").val().trim()
+			};
+
+		var currentURL = window.location.origin;
+		$.post(currentURL + "/api/tables", newHungryPerson, (data) => {
+			if(data == true) {
+				alert("You're booked.  Please be seated.");
+			}
+			if (data == false) {
+				alert("You've been added to the waitlist.");
+			}
+
+		});
+
+		return false;
+		
+
+		});
+			
+
+	</script>
 
 </body>
 </html>

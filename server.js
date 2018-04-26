@@ -93,7 +93,13 @@ app.post("/api/tables", function(req, res) {
 
   console.log(newHungryPerson);
 
-  hungryPeople.push(newHungryPerson);
+  if (hungryPeople.length < 5) {
+    hungryPeople.push(newHungryPerson);
+    
+    
+  } else {
+    waitingHungryPeople.push(newHungryPerson);
+  }
 
   res.json(newHungryPerson);
 });
